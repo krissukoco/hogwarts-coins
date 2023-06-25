@@ -53,7 +53,7 @@ def get_combinations(target: int) -> List[Combination]:
     _start = time.time()
     combinations: List[Combination] = []
 
-    for g2 in range(target // G2):
+    for g2 in range(target // G2 + 1):
         # NOTE on performance and optimization:
         # To improve performance, on the beginning of each loop, create a combination object
         # if combination has no remaining value, then check if it is fulfilled.
@@ -69,37 +69,37 @@ def get_combinations(target: int) -> List[Combination]:
             if comb.is_fulfilled():
                 combinations.append(comb)
             continue
-        for g1 in range(target // G1):
+        for g1 in range(target // G1 + 1):
             comb = Combination(target=target, G2=g2, G1=g1)
             if not comb.has_remaining():
                 if comb.is_fulfilled():
                     combinations.append(comb)
                 continue
-            for s50 in range(target // S50):
+            for s50 in range(target // S50 + 1):
                 comb = Combination(target=target, G2=g2, G1=g1, S50=s50)
                 if not comb.has_remaining():
                     if comb.is_fulfilled():
                         combinations.append(comb)
                     continue
-                for s25 in range(target // S25):
+                for s25 in range(target // S25 + 1):
                     comb = Combination(target=target, G2=g2, G1=g1, S50=s50, S25=s25)
                     if not comb.has_remaining():
                         if comb.is_fulfilled():
                             combinations.append(comb)
                         continue
-                    for s10 in range(target // S10):
+                    for s10 in range(target // S10 + 1):
                         comb = Combination(target=target, G2=g2, G1=g1, S50=s50, S25=s25, S10=s10)
                         if not comb.has_remaining():
                             if comb.is_fulfilled():
                                 combinations.append(comb)
                             continue
-                        for s5 in range(target // S5):
+                        for s5 in range(target // S5 + 1):
                             comb = Combination(target=target, G2=g2, G1=g1, S50=s50, S25=s25, S10=s10, S5=s5)
                             if not comb.has_remaining():
                                 if comb.is_fulfilled():
                                     combinations.append(comb)
                                 continue
-                            for s1 in range(target // S1):
+                            for s1 in range(target // S1 + 1):
                                 comb = Combination(target, g2, g1, s50, s25, s10, s5, s1)
                                 if comb.is_fulfilled():
                                     combinations.append(comb)
