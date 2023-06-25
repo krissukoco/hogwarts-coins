@@ -111,3 +111,31 @@ def get_combinations(target: int) -> List[Combination]:
 TARGET = 350
 combinations = get_combinations(TARGET)
 print(len(combinations))
+
+
+# UNOPTIMIZED VERSION
+def get_combinations_unoptimized(target: int) -> List[Combination]:
+    if target < 1:
+        raise ValueError("target can only be >= 1")
+    
+    _start = time.time()
+    combinations: List[Combination] = []
+
+    for g2 in range(target // G2):
+        for g1 in range(target // G1):
+            for s50 in range(target // S50):
+                for s25 in range(target // S25):
+                    for s10 in range(target // S10):
+                        for s5 in range(target // S5):
+                            for s1 in range(target // S1):
+                                comb = Combination(target, g2, g1, s50, s25, s10, s5, s1)
+                                if comb.is_fulfilled():
+                                    combinations.append(comb)
+
+    print(f"Finished: {time.time() - _start} seconds | Found {len(combinations)} combinations")
+    return combinations
+
+# Put test case here
+# TARGET = 350
+# combinations = get_combinations_unoptimized(TARGET)
+# print(len(combinations))
